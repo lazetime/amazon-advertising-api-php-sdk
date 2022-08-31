@@ -37,7 +37,7 @@ class Client
         'refreshToken' => null,
         'sandbox' => false,
         'saveFile' => false,
-        'apiVersion' => 'v1',
+        'apiVersion' => 'v2',
         'deleteGzipFile' => false,
     ];
 
@@ -409,9 +409,17 @@ class Client
         if (array_key_exists(strtolower($this->config["region"]), $this->endpoints)) {
             $region_code = strtolower($this->config["region"]);
             if ($this->config["sandbox"]) {
-                $this->endpoint = "https://{$this->endpoints[$region_code]["sandbox"]}/{$this->apiVersion}";
+                if (empty($this->apiVersion)) {
+                    $this->endpoint = "https://{$this->endpoints[$region_code]["sandbox"]}";
+                } else {
+                    $this->endpoint = "https://{$this->endpoints[$region_code]["sandbox"]}/{$this->apiVersion}";
+                }
             } else {
-                $this->endpoint = "https://{$this->endpoints[$region_code]["prod"]}/{$this->apiVersion}";
+                if (empty($this->apiVersion)) {
+                    $this->endpoint = "https://{$this->endpoints[$region_code]["prod"]}";
+                } else {
+                    $this->endpoint = "https://{$this->endpoints[$region_code]["prod"]}/{$this->apiVersion}";
+                }
             }
             $this->tokenUrl = $this->endpoints[$region_code]["tokenUrl"];
         } else {
