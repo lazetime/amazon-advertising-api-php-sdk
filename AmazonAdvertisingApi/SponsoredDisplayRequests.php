@@ -455,4 +455,112 @@ trait SponsoredDisplayRequests
     {
         return $this->operation("sd/suggestedProducts/productReadinessStatus", $data, "POST");
     }
+
+    /**
+     * Returns a set of recommended products and categories to target.
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Targeting%20Recommendations/getTargetRecommendations
+     * @param null $data
+     * @return array
+     * @throws Exception
+     */
+    public function getSponsoredDisplayTargetingRecommendations($data = null): array
+    {
+        return $this->operation("sd/targets/recommendations", $data, "POST");
+    }
+
+    /**
+     * Returns a set of bid recommendations for targeting clauses.
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Bid%20Recommendations/getTargetBidRecommendations
+     * @param null $data
+     * @return array
+     * @throws Exception
+     */
+    public function getSponsoredDisplayBidRecommendations($data = null): array
+    {
+        return $this->operation("sd/targets/bid/recommendations", $data, "POST");
+    }
+
+    /**
+     * Gets a list of creatives.
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Creatives/listCreatives
+     * @param null $data
+     * @return array
+     * @throws Exception
+     */
+    public function listSponsoredDisplayCreatives($data = null): array
+    {
+        return $this->operation("sd/creatives", $data);
+    }
+
+    /**
+     * Updates one or more creatives.
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Creatives/updateCreatives
+     * @param null $data
+     * @return array
+     * @throws Exception
+     */
+    public function updateSponsoredDisplayCreatives($data = null): array
+    {
+        return $this->operation("sd/creatives", $data, "PUT");
+    }
+
+    /**
+     * A POST request of one or more creatives.
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Creatives/createCreatives
+     * @param null $data
+     * @return array
+     * @throws Exception
+     */
+    public function createSponsoredDisplayCreatives($data = null): array
+    {
+        return $this->operation("sd/creatives", $data, "POST");
+    }
+
+    /**
+     * Gets creative preview HTML.
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Creatives/postCreativePreview
+     * @param null $data
+     * @return array
+     * @throws Exception
+     */
+    public function getSponsoredDisplayCreativesPreview($data = null): array
+    {
+        return $this->operation("sd/creatives/preview", $data, "POST");
+    }
+
+    /**
+     * Gets a list of creative moderations.
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Creatives/listCreativeModerations
+     * @param null $data
+     * @return array
+     * @throws Exception
+     */
+    public function getSponsoredDisplayCreativesModerations($data = null): array
+    {
+        return $this->operation("sd/moderation/creatives", $data);
+    }
+
+    /**
+     * Gets a list of websites/apps that are on the advertiser's Brand Safety Deny List.
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Brand%20Safety%20List/listDomains
+     * @param null $data
+     * @return array
+     * @throws Exception
+     */
+    public function listSponsoredDisplayBrandSafety($data = null): array
+    {
+        return $this->operation("/sd/brandSafety/deny", $data);
+    }
+
+    /**
+     * Gets the status of a report previously requested.
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Reports/getReportStatus
+     * @param null $data
+     * @return array
+     * @throws Exception
+     */
+    public function getSponsoredDisplayReports(int $reportId): array
+    {
+        return $this->operation("v2/reports/{$reportId}");
+    }
 }
