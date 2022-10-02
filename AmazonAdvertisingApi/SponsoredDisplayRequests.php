@@ -553,8 +553,8 @@ trait SponsoredDisplayRequests
     }
 
     /**
-     * Gets a list of websites/apps that are on the advertiser's Brand Safety Deny List.
-     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Brand%20Safety%20List/listDomains
+     * Creates one or more domains to add to a Brand Safety Deny List. The Brand Safety Deny List is at the advertiser level. It can take up to 15 minutes from the time a domain is added to the time it is reflected in the deny list.
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Brand%20Safety%20List/createBrandSafetyDenyListDomains
      * @param null $data
      * @return array
      * @throws Exception
