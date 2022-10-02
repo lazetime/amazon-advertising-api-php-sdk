@@ -547,9 +547,21 @@ trait SponsoredDisplayRequests
      * @return array
      * @throws Exception
      */
-    public function listSponsoredDisplayBrandSafety($data = null): array
+    public function listSponsoredDisplayBrandSafetyDeny($data = null): array
     {
         return $this->operation("/sd/brandSafety/deny", $data);
+    }
+
+    /**
+     * Gets a list of websites/apps that are on the advertiser's Brand Safety Deny List.
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Brand%20Safety%20List/listDomains
+     * @param null $data
+     * @return array
+     * @throws Exception
+     */
+    public function createSponsoredDisplayBrandSafetyDeny($data = null): array
+    {
+        return $this->operation("/sd/brandSafety/deny", $data, "POST");
     }
 
     /**
