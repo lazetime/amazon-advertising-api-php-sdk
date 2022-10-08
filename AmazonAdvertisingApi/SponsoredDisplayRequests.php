@@ -495,11 +495,11 @@ trait SponsoredDisplayRequests
     /**
      * Updates one or more creatives.
      * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Creatives/updateCreatives
-     * @param null $data
+     * @param array $data
      * @return array
      * @throws Exception
      */
-    public function updateSponsoredDisplayCreatives($data = null): array
+    public function updateSponsoredDisplayCreatives(array $data): array
     {
         return $this->operation("sd/creatives", $data, "PUT");
     }
@@ -507,11 +507,11 @@ trait SponsoredDisplayRequests
     /**
      * A POST request of one or more creatives.
      * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Creatives/createCreatives
-     * @param null $data
+     * @param array $data
      * @return array
      * @throws Exception
      */
-    public function createSponsoredDisplayCreatives($data = null): array
+    public function createSponsoredDisplayCreatives(array $data): array
     {
         return $this->operation("sd/creatives", $data, "POST");
     }
@@ -549,30 +549,138 @@ trait SponsoredDisplayRequests
      */
     public function listSponsoredDisplayBrandSafetyDeny($data = null): array
     {
-        return $this->operation("/sd/brandSafety/deny", $data);
+        return $this->operation("sd/brandSafety/deny", $data);
     }
 
     /**
      * Creates one or more domains to add to a Brand Safety Deny List. The Brand Safety Deny List is at the advertiser level. It can take up to 15 minutes from the time a domain is added to the time it is reflected in the deny list.
      * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Brand%20Safety%20List/createBrandSafetyDenyListDomains
+     * @param array $data
+     * @return array
+     * @throws Exception
+     */
+    public function createSponsoredDisplayBrandSafetyDeny(array $data): array
+    {
+        return $this->operation("sd/brandSafety/deny", $data, "POST");
+    }
+
+    /**
+     * Archives all of the domains in the Brand Safety Deny List. It can take several hours from the time a domain is deleted to the time it is reflected in the deny list. You can check the status of the delete request by calling GET /sd/brandSafety/{requestId}/status. If the status is "COMPLETED", you can call GET /sd/brandSafety/deny to validate that your deny list has been successfully deleted.
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Brand%20Safety%20List/deleteBrandSafetyDenyList
      * @param null $data
      * @return array
      * @throws Exception
      */
-    public function createSponsoredDisplayBrandSafetyDeny($data = null): array
+    public function archiveSponsoredDisplayBrandSafetyDeny($data = null): array
     {
-        return $this->operation("/sd/brandSafety/deny", $data, "POST");
+        return $this->operation("sd/brandSafety/deny", $data, "DELETE");
+    }
+
+    /**
+     * Gets the results for the given request
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Brand%20Safety%20List/getRequestResults
+     * @param int $requestId
+     * @return array
+     * @throws Exception
+     */
+    public function getSponsoredDisplayBrandSafetyDenyRequestResults(int $requestId): array
+    {
+        return $this->operation("sd/brandSafety/{$requestId}/results");
+    }
+
+    /**
+     * Gets the status of the given request
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Brand%20Safety%20List/getRequestStatus
+     * @param int $requestId
+     * @return array
+     * @throws Exception
+     */
+    public function getSponsoredDisplayBrandSafetyDenyRequestStatus(int $requestId): array
+    {
+        return $this->operation("sd/brandSafety/{$requestId}/status");
+    }
+
+    /**
+     * List status of all requests
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Brand%20Safety%20List/listRequestStatus
+     * @param null $data
+     * @return array
+     * @throws Exception
+     */
+    public function listSponsoredDisplayBrandSafetyDenyRequestStatus($data = null): array
+    {
+        return $this->operation("sd/brandSafety/status");
     }
 
     /**
      * Gets the status of a report previously requested.
      * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Reports/getReportStatus
-     * @param null $data
+     * @param int $reportId
      * @return array
      * @throws Exception
      */
     public function getSponsoredDisplayReports(int $reportId): array
     {
         return $this->operation("v2/reports/{$reportId}");
+    }
+
+    /**
+     * Downloads a previously requested report identified by reportId.
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Reports/downloadReport
+     * @param int $reportId
+     * @return array
+     * @throws Exception
+     */
+    public function downloadSponsoredDisplayReports(int $reportId): array
+    {
+        return $this->operation("v2/reports/{$reportId}/download");
+    }
+
+    /**
+     * Creates a report request.
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Reports/requestReport
+     * @param string $recordType
+     * @return array
+     * @throws Exception
+     */
+    public function createSponsoredDisplayReports(string $recordType): array
+    {
+        return $this->operation("sd/{$recordType}/report", null, "POST");
+    }
+
+    /**
+     * Request a file-based snapshot of all entities of the specified type in the account satisfying the filtering criteria
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Snapshots/createSnapshot
+     * @param string $recordType
+     * @return array
+     * @throws Exception
+     */
+    public function createSponsoredDisplaySnapshots(string $recordType): array
+    {
+        return $this->operation("sd/{$recordType}/snapshot", null, "POST");
+    }
+
+    /**
+     * Retrieve status, metadata, and location of previously requested snapshot
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Snapshots/getSnapshot
+     * @param int $snapshotId
+     * @return array
+     * @throws Exception
+     */
+    public function getSponsoredDisplaySnapshots(int $snapshotId): array
+    {
+        return $this->operation("sd/snapshots/{$snapshotId}");
+    }
+
+    /**
+     * Download previously requested snapshot
+     * @see https://advertising.amazon.com/API/docs/en-us/sponsored-display/3-0/openapi#/Snapshots/downloadSnapshot
+     * @param int $snapshotId
+     * @return array
+     * @throws Exception
+     */
+    public function downloadSponsoredDisplaySnapshots(int $snapshotId): array
+    {
+        return $this->operation("sd/snapshots/{$snapshotId}");
     }
 }
