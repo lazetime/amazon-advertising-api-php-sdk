@@ -12,6 +12,7 @@ require_once "SponsoredBrandsRequests.php";
 require_once "SponsoredDisplayRequests.php";
 require_once "ProductEligibilityRequests.php";
 require_once "ProfileRequests.php";
+require_once "ReportingRequests.php";
 
 /**
  * Class Client
@@ -24,6 +25,7 @@ class Client
     use SponsoredDisplayRequests;
     use ProductEligibilityRequests;
     use ProfileRequests;
+    use ReportingRequests;
 
     public const CAMPAIGN_TYPE_SPONSORED_PRODUCTS = 'sponsoredProducts';
     public const CAMPAIGN_TYPE_SPONSORED_BRANDS = 'sponsoredBrands';
