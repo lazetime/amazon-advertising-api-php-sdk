@@ -7,7 +7,7 @@ trait ReportingRequests
 {
     public function createReport($data)
     {
-        return $this->operation("reporting/reports", $data);
+        return $this->operation("reporting/reports", $data, 'POST');
     }
 
     public function getReportStatus(string $reportId)
