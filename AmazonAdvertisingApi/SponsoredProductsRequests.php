@@ -390,7 +390,7 @@ trait SponsoredProductsRequests
         if (!$type && $this->apiVersion == 'v2') {
             $this->logAndThrow("Unable to perform request. No type is set");
         }
-        return $this->operation($type . "keywords", $data, "PUT");
+        return $this->operation($type . "keywords", $data, "PUT", "application/vnd.spKeyword.v3+json");
     }
 
     /**
