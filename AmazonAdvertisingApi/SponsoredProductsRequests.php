@@ -323,6 +323,27 @@ trait SponsoredProductsRequests
 
     /**
      * @param $keywordId
+     * @param array $data
+     * @return array
+     * @throws Exception
+     */
+    public function getBiddableKeywordList(array $data)
+    {
+        $type = $this->campaignTypePrefix ?: 'sp';
+        if ($this->apiVersion == 'v1') {
+            $type = null;
+        } else {
+            $type = $type . "/";
+        }
+
+        if (!$type && $this->apiVersion == 'v2') {
+            $this->logAndThrow("Unable to perform request. No type is set");
+        }
+        return $this->operation($type . "keywords/list", $data, "POST", "application/vnd.spKeyword.v3+json");
+    }
+
+    /**
+     * @param $keywordId
      * @param null|array $data
      * @return array
      * @throws Exception
