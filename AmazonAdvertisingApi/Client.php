@@ -232,7 +232,7 @@ class Client
      * @return array
      * @throws Exception
      */
-    private function operation(string $interface, ?array $params = [], string $method = "GET")
+    private function operation(string $interface, ?array $params = [], string $method = "GET", string $customizedHeader = null)
     {
         $headers = array(
             "Authorization: bearer {$this->config["accessToken"]}",
@@ -247,6 +247,10 @@ class Client
         // Media type for Targeting Recommendations
         if (str_contains($interface, "recommendations")) {
             array_push($headers, "Content-Type: application/vnd.sdtargetingrecommendations.v3.1+json");
+        } else if (!empty($customizedHeader)) {
+            array_push($headers, "Content-Type: ".$customizedHeader);
+            array_push($headers, 'Accept: '.$customizedHeader);
+            array_push($headers, 'Prefer: return=representation');
         } else {
             array_push($headers, "Content-Type: application/json");
         }
